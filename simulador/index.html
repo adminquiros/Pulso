@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Simulador Bursátil | Pulso — Educación e Inversión Guiada</title>
+  <meta name="description"
+    content="Minijuego interactivo de simulación bursátil de Pulso. Aprende cómo las noticias influyen en las acciones colombianas y descubre tu nivel de análisis de mercado.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/logo.png">
+
+  <!-- Google Fonts: Plus Jakarta Sans, Inter, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- Ambient Glowing Atmosphere -->
+  <div class="ambient-glow" aria-hidden="true">
+    <div class="glow-top-left"></div>
+    <div class="glow-bottom-right"></div>
+  </div>
+
+  <!-- Confetti Canvas for High Scores -->
+  <canvas id="confettiCanvas" aria-hidden="true"></canvas>
+
+  <!-- Sticky App Header -->
+  <header class="app-header" role="banner">
+    <div class="header-container">
+      <a href="../" class="brand-link" title="Volver al Pitch Deck de Pulso">
+        <img src="assets/logo.png" alt="Pulso — Educación e Inversión Guiada" class="brand-logo">
+        <span class="sim-badge">
+          <span class="pulse-dot"></span>
+          Simulador
+        </span>
+      </a>
+
+      <div class="header-actions">
+        <button class="icon-btn" id="btnToggleSound" title="Silenciar / Activar sonido" aria-label="Control de sonido">
+          <span id="soundIcon">🔊</span>
+        </button>
+        <a href="../" class="deck-link-btn" title="Ver la presentación completa del Pitch Deck">
+          <span>📊 Pitch Deck</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Game Container -->
+  <main class="app-main">
+
+    <!-- ====================================================================
+         SCREEN 1: ONBOARDING / WELCOME
+         ==================================================================== -->
+    <section class="view-screen active" id="screenWelcome" aria-labelledby="welcomeTitle">
+      <div class="welcome-card">
+        <div class="welcome-hero-img-wrap">
+          <img src="assets/logo.png" alt="Pulso Logo" class="welcome-logo-large">
+        </div>
+
+        <div class="welcome-badge">
+          <span>⚡ Experiencia Interactiva · 1 - 2 Minutos</span>
+        </div>
+
+        <h1 class="welcome-title" id="welcomeTitle">
+          ¿Cómo impactan las noticias <br>
+          <span class="gradient-text">el valor de una acción?</span>
+        </h1>
+
+        <div class="welcome-quote">
+          "Las noticias influyen en los mercados. <strong>Pulso</strong> transforma información compleja en señales fáciles de interpretar para cualquier persona."
+        </div>
+
+        <div class="welcome-rules-grid">
+          <div class="rule-card">
+            <span class="rule-icon">💰</span>
+            <span class="rule-title">Capital Inicial</span>
+            <span class="rule-desc">$100.000 COP para invertir en 6 rondas.</span>
+          </div>
+          <div class="rule-card">
+            <span class="rule-icon">📈</span>
+            <span class="rule-title">Si Aciertas</span>
+            <span class="rule-desc">+$10.000 COP de rendimiento para tu cartera.</span>
+          </div>
+          <div class="rule-card">
+            <span class="rule-icon">📉</span>
+            <span class="rule-title">Si Te Equivocas</span>
+            <span class="rule-desc">-$10.000 COP por no anticipar la reacción del mercado.</span>
+          </div>
+        </div>
+
+        <button class="welcome-cta-btn" id="btnStartSim">
+          <span>Comenzar Simulación Bursátil</span>
+          <span>➜</span>
+        </button>
+
+        <p class="welcome-footer-note">
+          Basado en 6 eventos corporativos de empresas líderes del mercado colombiano (BVC).
+        </p>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCREEN 2: GAMEPLAY (QUESTIONS 1 TO 6)
+         ==================================================================== -->
+    <section class="view-screen" id="screenGame" aria-labelledby="companyName">
+      <!-- HUD Stats Bar -->
+      <div class="game-hud" role="region" aria-label="Métricas de la ronda">
+        <div class="hud-capital-box">
+          <span class="hud-label">Capital Actual</span>
+          <div class="hud-capital-amount">
+            <span id="hudCapital">$100.000</span>
+            <span class="hud-capital-delta" id="hudDelta">+10k</span>
+          </div>
+        </div>
+
+        <div class="hud-progress-box">
+          <span class="hud-round-counter">Ronda <span id="roundCurrent">1</span> de 6</span>
+          <div class="stepped-progress-bar" id="progressBar">
+            <div class="progress-step-pill current"></div>
+            <div class="progress-step-pill"></div>
+            <div class="progress-step-pill"></div>
+            <div class="progress-step-pill"></div>
+            <div class="progress-step-pill"></div>
+            <div class="progress-step-pill"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Trading Card -->
+      <div class="game-card">
+        <!-- Company Header Info -->
+        <div class="company-header">
+          <div class="company-meta">
+            <div class="company-logo-wrap" id="companyLogoWrap">
+              <img src="assets/iconos/bancolombia.svg" alt="Empresa" id="companyLogo">
+            </div>
+            <div class="company-info">
+              <h2 class="company-name" id="companyName">Bancolombia</h2>
+              <div class="company-tags">
+                <span class="company-ticker" id="companyTicker">BCOL · BVC</span>
+                <span class="company-sector" id="companySector">Banca & Finanzas</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="company-market-price">
+            <div class="market-price-val" id="marketPriceVal">$34.500 COP</div>
+            <span class="market-price-change positive" id="marketPriceChange">+0.85% Hoy</span>
+          </div>
+        </div>
+
+        <!-- Mini Interactive Stock Chart -->
+        <div class="chart-container">
+          <canvas id="stockChartCanvas"></canvas>
+          <span class="chart-watermark">PULSO DATA · EN VIVO</span>
+          <span class="chart-status-badge" id="chartStatusBadge">+3.4% ALZA</span>
+        </div>
+
+        <!-- News Terminal Strip -->
+        <div class="news-terminal">
+          <div class="news-terminal-badge">
+            <span>📰 COMUNICADO CORPORATIVO</span>
+          </div>
+          <p class="news-headline-text" id="newsHeadline">
+            Bancolombia anunció la apertura de 50 nuevos corresponsales bancarios y oficinas digitales en municipios donde anteriormente no tenía cobertura.
+          </p>
+        </div>
+
+        <!-- Decision Prompt -->
+        <div class="decision-prompt-wrap">
+          <h3 class="decision-question">¿Sube o baja la acción?</h3>
+          <p class="decision-hint">Anticipa cómo reaccionará el mercado frente a esta noticia</p>
+        </div>
+
+        <!-- Decision Action Buttons -->
+        <div class="decision-buttons-grid">
+          <button class="decision-btn btn-sube" id="btnSube" aria-label="Predecir que la acción SUBE">
+            <span class="btn-arrow-icon">⬆</span>
+            <span>SUBE</span>
+            <span class="btn-key-hint">Tecla 1 o [↑]</span>
+          </button>
+
+          <button class="decision-btn btn-baja" id="btnBaja" aria-label="Predecir que la acción BAJA">
+            <span class="btn-arrow-icon">⬇</span>
+            <span>BAJA</span>
+            <span class="btn-key-hint">Tecla 2 o [↓]</span>
+          </button>
+        </div>
+
+        <!-- Signal Reveal Card (Hidden until decision) -->
+        <div class="signal-reveal-card" id="signalRevealCard" role="region" aria-live="polite">
+          <div class="signal-status-header">
+            <div class="signal-status-badge" id="signalStatusBadge">
+              <span id="signalStatusIcon">✅</span>
+              <span id="signalStatusTitle">¡Correcto!</span>
+            </div>
+            <span class="signal-delta-amount" id="signalDeltaAmount">+$10.000 COP</span>
+          </div>
+
+          <p class="signal-impact-msg" id="signalImpactMsg">
+            El mercado interpretó esta noticia como positiva para la compañía.
+          </p>
+
+          <!-- Pulso Signal Insight Box -->
+          <div class="pulso-insight-box">
+            <div class="insight-header">
+              <span>💡 Señal Pulso</span>
+            </div>
+            <p class="insight-text" id="signalRationale">
+              La expansión de cobertura suele interpretarse como una señal de crecimiento y mayores oportunidades de ingresos futuros.
+            </p>
+          </div>
+
+          <!-- Advance Controls -->
+          <div class="next-action-row">
+            <span class="auto-timer-hint" id="autoTimerHint">Avanzando automáticamente...</span>
+            <button class="btn-next-question" id="btnNextQuestion">
+              <span>Siguiente Noticia</span>
+              <span>➜</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         SCREEN 3: FINAL SUMMARY & PERFORMANCE DASHBOARD
+         ==================================================================== -->
+    <section class="view-screen" id="screenResults" aria-labelledby="resultsTitle">
+      <div class="results-card">
+        <div class="results-header">
+          <div class="results-main-badge">
+            <span>🎯 Simulación Finalizada</span>
+          </div>
+          <h1 class="results-title" id="resultsTitle">Tu Desempeño Bursátil</h1>
+          <p class="results-subtitle">Este fue el resultado de tus decisiones frente al mercado</p>
+        </div>
+
+        <!-- Assigned Level Badge Banner -->
+        <div class="level-banner" id="levelBanner">
+          <div class="level-icon-large" id="levelIcon">🏆</div>
+          <div class="level-info">
+            <span class="level-tag">Nivel Asignado</span>
+            <h2 class="level-name" id="levelName">Gurú del Mercado</h2>
+            <p class="level-desc" id="levelDesc">
+              ¡Desempeño impecable! Tu lectura del mercado es sobresaliente. Estás listo para liderar tus decisiones financieras.
+            </p>
+          </div>
+        </div>
+
+        <!-- Key Metrics Grid -->
+        <div class="metrics-grid">
+          <div class="metric-tile full-width">
+            <div>
+              <div class="metric-label">Capital Final vs Inicial</div>
+              <div class="metric-value" id="resCapitalFinal">$160.000 COP</div>
+            </div>
+            <div style="text-align: right;">
+              <div class="metric-label">Rendimiento Total</div>
+              <div class="metric-value" id="resCapitalPct">+60.0%</div>
+              <div class="metric-sub positive" id="resNetDelta">+$60.000 COP</div>
+            </div>
+          </div>
+
+          <div class="metric-tile">
+            <div class="metric-label">Aciertos</div>
+            <div class="metric-value" style="color: var(--verde-ganancia);" id="resAciertos">6 de 6</div>
+          </div>
+
+          <div class="metric-tile">
+            <div class="metric-label">Errores</div>
+            <div class="metric-value" style="color: var(--rojo-perdida);" id="resErrores">0 de 6</div>
+          </div>
+
+          <div class="metric-tile">
+            <div class="metric-label">Precisión</div>
+            <div class="metric-value" style="color: var(--cyan-secundario);" id="resPrecision">100%</div>
+          </div>
+
+          <div class="metric-tile">
+            <div class="metric-label">Capital Inicial</div>
+            <div class="metric-value" style="color: var(--text-muted);">$100.000 COP</div>
+          </div>
+        </div>
+
+        <!-- Decision Breakdown Review Accordion -->
+        <div class="review-section">
+          <button class="review-toggle-btn" id="btnToggleReview" aria-expanded="false">
+            <span>📋 Ver análisis detallado de tus 6 decisiones</span>
+            <span id="reviewArrow">▼</span>
+          </button>
+          <div class="review-list" id="reviewList">
+            <!-- Dynamically populated in script.js -->
+          </div>
+        </div>
+
+        <!-- Strategic Pulso Demonstration Pitch -->
+        <div class="strategic-card">
+          <h3 class="strategic-title">⚡ ¿Qué demostró esta simulación?</h3>
+          <p class="strategic-text">
+            Las noticias mueven los mercados minuto a minuto. Analizar informes de decenas de páginas requiere tiempo y experiencia técnica. <strong>Pulso</strong> democratiza ese análisis: procesa datos complejos y te entrega señales claras, rápidas y accionables para cuidar y hacer crecer tu patrimonio.
+          </p>
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="results-actions-grid">
+          <button class="action-btn-primary" id="btnRestart">
+            <span>🔄 Jugar de nuevo</span>
+          </button>
+
+          <a href="../" class="action-btn-gold">
+            <span>📊 Ver Pitch Deck para Inversionistas</span>
+          </a>
+
+          <button class="action-btn-secondary" id="btnShare">
+            <span>🔗 Compartir mi resultado</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification Feedback -->
+  <div class="toast-notice" id="toastNotice" role="status" aria-live="polite">
+    <span>✅</span>
+    <span id="toastMsg">¡Resultado copiado al portapapeles!</span>
+  </div>
+
+  <!-- Game Logic Script -->
+  <script src="script.js"></script>
+</body>
+
+</html>

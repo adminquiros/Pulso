@@ -1,0 +1,365 @@
+Especificación Completa del Simulador Bursátil de Pulso
+
+Quiero desarrollar un minijuego web de simulación bursátil para el proyecto Pulso, cuyo propósito es demostrar de forma sencilla, interactiva y educativa cómo las noticias pueden influir en el comportamiento de las acciones en bolsa. La experiencia debe ser rápida, intuitiva y orientada a usuarios que no necesariamente tienen conocimientos financieros.
+
+El juego estará integrado dentro del ecosistema de Pulso y servirá como una demostración práctica del valor de la plataforma. La idea es que el usuario lea una noticia corta relacionada con una empresa colombiana y, con base en esa información, tome una decisión sobre si considera que la acción de dicha empresa subirá o bajará. Posteriormente, el simulador revelará el resultado y mostrará cómo esa decisión habría impactado una inversión ficticia.
+
+La experiencia completa debe durar entre uno y dos minutos, permitiendo que cualquier usuario juegue una ronda completa en muy poco tiempo.
+
+El repositorio de GitHub donde se alojará el proyecto es:
+
+https://github.com/adminquiros/Pulso.git
+
+Actualmente el repositorio está vacío.
+
+La presentación principal ya existe y corresponde al archivo:
+
+Pulso_Pitch_Deck_Presentacion.html
+
+El simulador debe estar disponible como una experiencia independiente dentro del mismo repositorio para que pueda compartirse mediante una URL diferente a la de la presentación.
+
+Ejemplo de estructura deseada:
+
+Presentación principal:
+
+https://adminquiros.github.io/Pulso/
+
+Simulador:
+
+https://adminquiros.github.io/Pulso/simulador/
+
+El simulador debe estar construido únicamente con HTML, CSS y JavaScript, sin dependencia de backend ni bases de datos.
+
+OBJETIVO DEL JUEGO
+
+El objetivo es demostrar que las noticias y eventos empresariales pueden influir en las decisiones de inversión y en el comportamiento de los mercados financieros.
+
+La experiencia debe transmitir claramente el mensaje principal de Pulso:
+
+"Las noticias influyen en los mercados. Pulso transforma información compleja en señales fáciles de interpretar para cualquier persona."
+
+No se busca enseñar análisis financiero avanzado, sino generar una experiencia simple, entretenida y educativa.
+
+FLUJO DEL JUEGO
+
+Al iniciar, el jugador recibe un capital ficticio de:
+
+$100.000 COP
+
+Para cada ronda se mostrará:
+
+Una noticia corta sobre una empresa colombiana.
+
+La pregunta:
+
+¿Sube o baja la acción?
+
+Dos botones:
+
+⬆ SUBE
+
+⬇ BAJA
+
+El usuario selecciona una opción.
+
+El sistema revela el resultado.
+
+Se actualiza la gráfica.
+
+Se actualiza el capital.
+
+El usuario avanzará automáticamente a la siguiente pregunta.
+
+SISTEMA DE PUNTUACIÓN
+
+Capital inicial:
+
+$100.000 COP
+
+Respuesta correcta:
+
+$10.000 COP
+
+Respuesta incorrecta:
+
+$10.000 COP
+
+Al finalizar, el sistema mostrará:
+
+Capital inicial
+
+Capital final
+
+Número de aciertos
+
+Número de errores
+
+Porcentaje de efectividad
+
+Nivel alcanzado
+
+VISUALIZACIÓN DEL RESULTADO
+
+Si la respuesta es correcta:
+
+Color verde.
+Mensaje positivo.
+Incremento del capital.
+Gráfico con tendencia alcista.
+Animación de ganancia.
+
+Ejemplo:
+
+✅ Correcto
+
+El mercado interpretó esta noticia como positiva para la compañía.
+
++$10.000
+
+Si la respuesta es incorrecta:
+
+Color rojo.
+Disminución del capital.
+Gráfico descendente.
+Animación de pérdida.
+
+Ejemplo:
+
+❌ Incorrecto
+
+El mercado reaccionó de forma diferente a tu predicción.
+
+-$10.000
+
+DISEÑO VISUAL
+
+El simulador debe inspirarse visualmente en aplicaciones modernas de trading como:
+
+TradingView
+Robinhood
+eToro
+
+La interfaz debe sentirse profesional, moderna y tecnológica.
+
+Características visuales:
+
+Diseño Mobile First.
+Completamente responsive.
+Navegación táctil.
+Botones grandes.
+Texto fácil de leer.
+Tarjetas modernas.
+Animaciones suaves.
+Aspecto premium.
+
+Paleta de colores sugerida:
+
+Fondo principal: #0D1117
+
+Tarjetas: #161B22
+
+Verde ganancias: #00C853
+
+Rojo pérdidas: #FF5252
+
+Texto: #FFFFFF
+
+Color secundario: #4FC3F7
+
+ELEMENTOS DE CADA PREGUNTA
+
+Cada pantalla debe incluir:
+
+Barra de progreso.
+Número de pregunta.
+Noticia destacada.
+Nombre de la empresa.
+Botón SUBE.
+Botón BAJA.
+Capital actual.
+Gráfico miniatura de la acción.
+Resultado de la ronda.
+
+REGLAS DEL JUEGO
+
+Cada pregunta solo puede responderse una vez.
+No se puede volver atrás.
+El resultado aparece inmediatamente.
+El capital debe actualizarse en tiempo real.
+Debe existir barra de progreso.
+Debe existir pantalla final de resultados.
+Toda la experiencia debe funcionar perfectamente desde celular.
+
+CASOS DE SIMULACIÓN
+
+Las siguientes noticias son ficticias y se utilizan únicamente para la demostración del concepto.
+
+PREGUNTA 1
+
+Noticia:
+
+Bancolombia anunció la apertura de 50 nuevos corresponsales bancarios y oficinas digitales en municipios donde anteriormente no tenía cobertura.
+
+Pregunta:
+
+¿Sube o baja la acción de Bancolombia?
+
+Resultado esperado:
+
+SUBE
+
+Justificación:
+
+La expansión de cobertura suele interpretarse como una señal de crecimiento y mayores oportunidades de ingresos futuros.
+
+PREGUNTA 2
+
+Noticia:
+
+Ecopetrol informó una falla temporal en una de sus principales refinerías, obligando a reducir la producción durante las próximas dos semanas.
+
+Pregunta:
+
+¿Sube o baja la acción de Ecopetrol?
+
+Resultado esperado:
+
+BAJA
+
+Justificación:
+
+Una reducción de producción suele generar preocupación por posibles impactos en ingresos y rentabilidad.
+
+PREGUNTA 3
+
+Noticia:
+
+Grupo Nutresa anunció la adquisición de una empresa especializada en alimentos saludables con operaciones en varios países de Latinoamérica.
+
+Pregunta:
+
+¿Sube o baja la acción de Grupo Nutresa?
+
+Resultado esperado:
+
+SUBE
+
+Justificación:
+
+Las adquisiciones estratégicas suelen percibirse como oportunidades de crecimiento y expansión.
+
+PREGUNTA 4
+
+Noticia:
+
+ISA reportó retrasos regulatorios en un importante proyecto de transmisión energética para la región andina.
+
+Pregunta:
+
+¿Sube o baja la acción de ISA?
+
+Resultado esperado:
+
+BAJA
+
+Justificación:
+
+Los retrasos pueden afectar plazos de ejecución, ingresos futuros y confianza del mercado.
+
+PREGUNTA 5
+
+Noticia:
+
+Grupo Éxito registró ventas récord durante la temporada comercial de descuentos nacionales y superó las expectativas del mercado.
+
+Pregunta:
+
+¿Sube o baja la acción de Grupo Éxito?
+
+Resultado esperado:
+
+SUBE
+
+Justificación:
+
+Ventas superiores a lo esperado suelen interpretarse positivamente por inversionistas y analistas.
+
+PREGUNTA 6
+
+Noticia:
+
+Cementos Argos informó un incremento significativo en sus costos de energía y transporte durante el último trimestre.
+
+Pregunta:
+
+¿Sube o baja la acción de Cementos Argos?
+
+Resultado esperado:
+
+BAJA
+
+Justificación:
+
+El aumento de costos puede reducir márgenes de utilidad y afectar las expectativas financieras.
+
+PANTALLA FINAL
+
+Al terminar las seis preguntas, el simulador debe mostrar una pantalla resumen moderna y visual.
+
+Contenido:
+
+🎯 Simulación Finalizada
+
+Capital Inicial: $100.000
+
+Capital Final: $XXX.XXX
+
+Aciertos: X de 6
+
+Errores: X de 6
+
+Precisión: XX%
+
+Además debe asignar un nivel al usuario:
+
+0-2 aciertos: 🔴 Inversionista Novato
+
+3-4 aciertos: 🟡 Analista Junior
+
+5 aciertos: 🔵 Analista Intermedio
+
+6 aciertos: 🏆 Gurú del Mercado
+
+ESTRUCTURA DEL REPOSITORIO
+
+Pulso/
+
+index.html ← Presentación principal
+
+Pulso_Pitch_Deck_Presentacion.html
+
+simulador/
+
+index.html
+
+styles.css
+
+script.js
+
+assets/
+
+logo.png
+
+iconos/
+
+README.md
+
+OBJETIVO ESTRATÉGICO DE LA DEMOSTRACIÓN
+
+Este simulador no busca predecir el mercado ni enseñar inversión real. Su propósito es demostrar visualmente el problema que Pulso resuelve: ayudar a las personas a interpretar información de manera rápida para tomar mejores decisiones.
+
+Al finalizar la experiencia, el usuario debe entender que una noticia puede afectar positiva o negativamente una acción y que contar con señales claras y oportunas puede mejorar significativamente la toma de decisiones financieras.
+
+La sensación final debe ser la de haber utilizado una versión simplificada y gamificada de lo que Pulso aspira a ofrecer: transformar información compleja del mercado en decisiones sencillas, rápidas y comprensibles para cualquier persona.
+
+Envía tus comentarios en BizChat

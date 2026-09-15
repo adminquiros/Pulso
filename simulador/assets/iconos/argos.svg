@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="argos-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00D27F" />
+      <stop offset="100%" stop-color="#004DFF" />
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="#161B22" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <polygon points="24,11 36,18 36,32 24,39 12,32 12,18" fill="none" stroke="url(#argos-grad)" stroke-width="3.5" stroke-linejoin="round"/>
+  <polygon points="24,17 31,21 31,29 24,33 17,29 17,21" fill="url(#argos-grad)" opacity="0.85"/>
+</svg>

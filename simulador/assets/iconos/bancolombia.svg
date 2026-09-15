@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <defs>
+    <linearGradient id="bcol-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDDA24" />
+      <stop offset="50%" stop-color="#002D72" />
+      <stop offset="100%" stop-color="#E03A3E" />
+    </linearGradient>
+  </defs>
+  <rect width="48" height="48" rx="12" fill="#161B22" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+  <path d="M12 28 C 16 18, 22 16, 26 22 C 30 28, 34 26, 36 18" fill="none" stroke="url(#bcol-grad)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="12" cy="28" r="3" fill="#FDDA24"/>
+  <circle cx="36" cy="18" r="3" fill="#E03A3E"/>
+  <path d="M22 33 L26 33 L26 35 L22 35 Z" fill="#FFFFFF" opacity="0.6"/>
+</svg>
